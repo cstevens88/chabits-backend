@@ -30,6 +30,19 @@ router.put('/createUser', (req, res) => {
     const username = req.query.username;
     const password = req.query.password;
     const email = req.query.email;
+    pool.query('INSERT INTO users (id, username, password, email) VALUES ($1, $2, $3, $4)', [uuid.v1(), username, password, email], (error, results) => {
+        if(error) {
+            throw error;
+        }
+        res.status(201).json(results.rows);
+    })
+});
+
+/* TODO
+router.put('/:userId', (req, res) => {
+    const username = req.query.username;
+    const password = req.query.password;
+    const email = req.query.email;
     pool.query('INSERT INTO users (id, username, password, email) VALUES ($1, $2, $3, $4)',
     [uuid.v1(), username, password, email], (error, results) => {
         if(error) {
@@ -38,5 +51,7 @@ router.put('/createUser', (req, res) => {
         res.status(201).json(results.rows);
     })
 });
+
+*/
 
 module.exports = router;

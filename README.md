@@ -1,2 +1,2 @@
 # chabits-backend
- Back for chabits app
+ Backend for chabits app

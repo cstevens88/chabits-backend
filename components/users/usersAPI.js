@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const uuid = require('uuid');
+const uuid = require('uuid').v4;
 
 const pg = require('../../util/postgres');
 
@@ -32,7 +32,7 @@ router.put('/createUser', (req, res) => {
     const username = req.query.username;
     const password = req.query.password;
     const email = req.query.email;
-    pool.query('INSERT INTO users (id, username, password, email) VALUES ($1, $2, $3, $4)', [uuid.v4(), username, password, email], (error, results) => {
+    pool.query('INSERT INTO users (id, username, password, email) VALUES ($1, $2, $3, $4)', [uuid(), username, password, email], (error, results) => {
         if(error) {
             throw error;
         }

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const uuid = require('uuid');
+const uuid = require('uuid').v4;
 
 const pg = require('../../util/postgres');
 
@@ -31,7 +31,7 @@ router.put('/createChain', (req, res) => {
     const title = req.query.title;
     const description = req.query.description || ''; // This is optional, can be NULL
     const color = req.query.color || 'blue'; // Optional but NOT NULL, defaults to blue
-    pool.query('INSERT INTO chains (id, title, description, color) VALUES ($1, $2, $3, $4)', [uuid.v4(), title, description, color], (error, results) => {
+    pool.query('INSERT INTO chains (id, title, description, color) VALUES ($1, $2, $3, $4)', [uuid(), title, description, color], (error, results) => {
         if(error) {
             throw error;
         }

@@ -3,7 +3,7 @@ const app = express();
 const uuid = require('uuid');
 const Pool = require('pg').Pool;
 const port = 3000;
-const pgConfig = './.pg_config';
+const pgConfig = require('./.pg_config');
 
 let pool;
 try {
@@ -12,7 +12,7 @@ try {
         host: pgConfig.host,
         database: pgConfig.database,
         password: pgConfig.password,
-        port: pgConfig.port || 5432
+        port: 5432
     })
     pool.query("CREATE TABLE IF NOT EXISTS users (id VARCHAR(100) PRIMARY KEY, username VARCHAR(30), password VARCHAR(30), email VARCHAR(30) UNIQUE)");
 }
@@ -25,7 +25,7 @@ app.get('/getData', (req, res) => {
         if(error) {
             throw error
         }
-        res.status(200).json(results/*.rows*/)
+        res.status(200).json(results.rows)
     })
 });
 

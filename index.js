@@ -3,15 +3,16 @@ const app = express();
 const uuid = require('uuid');
 const Pool = require('pg').Pool;
 const port = 3000;
+const pgConfig = './.pg_config';
 
 let pool;
 try {
     pool = new Pool({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'postgres',
-        password: 'admin',
-        port: 5432
+        user: pgConfig.user,
+        host: pgConfig.host,
+        database: pgConfig.database,
+        password: pgConfig.password,
+        port: pgConfig.port || 5432
     })
     pool.query("CREATE TABLE IF NOT EXISTS users (id VARCHAR(100) PRIMARY KEY, username VARCHAR(30), password VARCHAR(30), email VARCHAR(30) UNIQUE)");
 }

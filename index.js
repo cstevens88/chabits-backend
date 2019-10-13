@@ -7,6 +7,10 @@ const pg = require('./util/postgres');
 
 const pool = pg.initializePostgres();
 
+// TODO: Abstract postgres querying into util/postgres.js
+// It doesn't belong here
+
+// TODO: Move these routes into their own module
 app.get('/getData', (req, res) => {
     pool.query('SELECT * FROM users', (error, results) => {
         if(error) {

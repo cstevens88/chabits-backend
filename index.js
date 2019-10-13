@@ -8,11 +8,6 @@ const chainRoutes = require('./components/chains/chainsAPI');
 app.use('/users', userRoutes);
 app.use('/chains', chainRoutes);
 
-/* Error-handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Internal Server Error');
-});*/
 // TODO: Abstract postgres querying into util/postgres.js
 // It doesn't belong here
 

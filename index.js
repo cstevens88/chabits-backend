@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const myLogger = require('./logConfig').myLogger;
+const myLogger = require('./logger').myLogger;
 
 const chainRoutes = require('./components/chains/chainsAPI');
 const userRoutes = require('./components/users/usersAPI');

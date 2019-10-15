@@ -1,4 +1,7 @@
 .env
 .pg_config
-logs
+config/
+logs/
+migrations/
+seeders/
 node_modules/

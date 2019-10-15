@@ -1,9 +1,14 @@
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const port = 3000;
 
 const userRoutes = require('./components/users/usersAPI');
 const chainRoutes = require('./components/chains/chainsAPI');
+
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(bodyParser.json())
 
 app.use('/users', userRoutes);
 app.use('/chains', chainRoutes);

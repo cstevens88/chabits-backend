@@ -1,3 +1,4 @@
+.env
 .pg_config
 logs
 node_modules/

@@ -1,15 +1,15 @@
-const pgConfig = require('../.pg_config');
+const dotenv = require('dotenv').config();
 const Pool = require('pg').Pool;
 
 module.exports.initializePostgres = function() {
     let pool;
     try {
         pool = new Pool({
-            user: pgConfig.user,
-            host: pgConfig.host,
-            database: pgConfig.database,
-            password: pgConfig.password,
-            port: pgConfig.port || 5432
+            user: process.env.POSTGRES_USER,
+            host: process.env.POSTGRES_HOST,
+            database: process.env.POSTGRES_DATABASE,
+            password: process.env.POSTGRES_PASSWORD,
+            port: process.env.POSTGRES_PORT || 5432
         })
         return pool;
     }

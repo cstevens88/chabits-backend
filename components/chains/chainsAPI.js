@@ -2,10 +2,6 @@ const express = require('express');
 const router = express.Router();
 const uuid = require('uuid').v4;
 
-const pg = require('../../util/postgres');
-
-const pool = pg.initializePostgres();
-
 router.get('/', (req, res) => {
     pool.query('SELECT * FROM chains', (error, results) => {
         if(error) {

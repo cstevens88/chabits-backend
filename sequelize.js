@@ -16,7 +16,6 @@ connectToDb = async function() {
     } catch(err) {
         console.log('Error connecting to RDS instance', err);
     }
-    return;
 }
 
 module.exports = {

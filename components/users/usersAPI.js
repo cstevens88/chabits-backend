@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:userId', (req, res) => {
+/*router.get('/:userId', (req, res) => {
     const userId = req.params.userId;
     pool.query(('SELECT * FROM users WHERE id=\'' + userId + '\''), (error, results) => {
         if(error) {

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const uuid = require('uuid').v4;
 
-router.get('/', (req, res) => {
+/*router.get('/', (req, res) => {
     pool.query('SELECT * FROM chains', (error, results) => {
         if(error) {
             throw error

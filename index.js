@@ -5,26 +5,9 @@ const app = express();
 const port = 3000;
 
 const myLogger = require('./logger').myLogger;
-const Sequelize = require('sequelize');
+const sequelize = require('./sequelize');
 
-const sequelize = new Sequelize(
-    process.env.POSTGRES_DATABASE,
-    process.env.POSTGRES_USER,
-    process.env.POSTGRES_PASSWORD,
-    {
-        host: process.env.POSTGRES_HOST,
-        dialect: 'postgres'
-    }
-);
-
-    sequelize
-        .authenticate()
-        .then(() => {
-            console.log('Connected to RDS instance')
-        })
-        .catch(err => {
-            console.error('Error connecting to RDS instance', err);
-        });
+sequelize.connectToDb();
 
 const chainRoutes = require('./components/chains/chainsAPI');
 const userRoutes = require('./components/users/usersAPI');

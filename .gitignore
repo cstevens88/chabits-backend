@@ -1,6 +1,5 @@
 .env
 config/
 logs/
-migrations/
 seeders/
 node_modules/

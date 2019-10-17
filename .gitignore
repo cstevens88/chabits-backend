@@ -1,5 +1,4 @@
 .env
-.pg_config
 config/
 logs/
 migrations/

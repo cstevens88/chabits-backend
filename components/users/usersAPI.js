@@ -3,7 +3,6 @@ const router = express.Router();
 const uuid = require('uuid').v4;
 
 const pg = require('../../util/postgres');
-console.log('test');
 const pool = pg.initializePostgres();
 
 router.get('/', (req, res) => {

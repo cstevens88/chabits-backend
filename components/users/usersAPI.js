@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const uuid = require('uuid').v4;
 
+const Sequelize = require('Sequelize');
+const Op = Sequelize.Op;
 const models = require('../../db/models/');
 const User = models.User;
 
@@ -52,14 +53,19 @@ router.get('/:userId', async (req, res, next) => {
 });
 
 router.put('/:userId', async (req, res, next) => {
-    const username = req.params.username;
     try {
-        const user = await User.update({
+        const updatedRows = await User.update(
+            {
+                username: req.body.username
+            },
+            {
             where: {
-                username: username
+                id: {
+                 [Op.eq]: req.params.userId
+                }
             }
         });
-        res.json(user);
+        res.json(updatedRows);
     } catch(e) {
         next(e);
     }

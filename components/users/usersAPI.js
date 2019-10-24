@@ -8,7 +8,9 @@ const User = models.User;
 //lets use async await and dispense with the tech debt
 router.get('/', async (req, res, next) => {
     try {
-        const users = await User.findAll()
+        const users = await User.findAll({
+            attributes: {exclude: ['password']}
+        });
         res.json(users);
     }
     catch(e) {
@@ -18,12 +20,17 @@ router.get('/', async (req, res, next) => {
 
 
 
-router.get('/:userId', async (req, res) => {
+router.get('/:userId', async (req, res, next) => {
     const userId = req.params.userId;
     try {
-        const user = await User.findAll({where: {
+        const user = await User.findAll({
+            where: {
             id: userId
-        }});
+        },
+        attributes: {
+            exclude: ['password']
+        }
+    });
         res.json(user);
     }
     catch(e) {

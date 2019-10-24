@@ -16,19 +16,22 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-/*router.get('/:userId', (req, res) => {
+
+
+router.get('/:userId', (req, res) => {
     const userId = req.params.userId;
-    pool.query(('SELECT * FROM users WHERE id=\'' + userId + '\''), (error, results) => {
-        if(error) {
-            throw error
-        } else if(!results.rows.length > 0) {
-            res.sendStatus(404);
-        }
-        res.status(200).json(results.rows);
-    });
+    try {
+        const user = await User.findAll({where: {
+            id: userId
+        }});
+        res.json(user);
+    }
+    catch(e) {
+        next(e)
+    }
 });
 
-// TODO: Update this route to use route parameters instead of URL querystring, if that's possible
+/* TODO: Update this route to use route parameters instead of URL querystring
 router.put('/createUser', (req, res) => {
     const username = req.query.username;
     const password = req.query.password;
@@ -39,7 +42,7 @@ router.put('/createUser', (req, res) => {
         }
         res.status(201).json(results.rows);
     })
-});
+});*/
 
 /* TODO
 router.put('/:userId', (req, res) => {

@@ -51,7 +51,7 @@ router.get('/:userId', async (req, res, next) => {
     }
 });
 
-router.put('/:userId', async (req, res) => {
+router.put('/:userId', async (req, res, next) => {
     const username = req.params.username;
     try {
         const user = await User.update({

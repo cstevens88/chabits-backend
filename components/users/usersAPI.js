@@ -2,13 +2,18 @@ const express = require('express');
 const router = express.Router();
 const uuid = require('uuid').v4;
 
-router.get('/', (req, res) => {
-    pool.query('SELECT * FROM users', (error, results) => {
-        if(error) {
-            throw error
-        }
-        res.status(200).json(results.rows)
-    })
+const models = require('../../db/models/');
+const User = models.User;
+
+//lets use async await and dispense with the tech debt
+router.get('/', async (req, res, next) => {
+    try {
+        const users = await User.findAll()
+        res.json(users);
+    }
+    catch(e) {
+        next(e);
+    }
 });
 
 /*router.get('/:userId', (req, res) => {

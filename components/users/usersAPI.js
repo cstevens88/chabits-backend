@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
 
 
 
-router.get('/:userId', (req, res) => {
+router.get('/:userId', async (req, res) => {
     const userId = req.params.userId;
     try {
         const user = await User.findAll({where: {

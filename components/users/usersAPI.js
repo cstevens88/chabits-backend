@@ -5,7 +5,6 @@ const uuid = require('uuid').v4;
 const models = require('../../db/models/');
 const User = models.User;
 
-//lets use async await and dispense with the tech debt
 router.get('/', async (req, res, next) => {
     try {
         const users = await User.findAll({
@@ -18,7 +17,21 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-
+router.post('/', async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const email = req.body.email;
+    try {
+        const user = await User.create({
+            username: username,
+            password:password,
+            email:email
+        });
+        res.json(user);
+    } catch(e) {
+        next(e);
+    }
+});
 
 router.get('/:userId', async (req, res, next) => {
     const userId = req.params.userId;
@@ -38,33 +51,18 @@ router.get('/:userId', async (req, res, next) => {
     }
 });
 
-/* TODO: Update this route to use route parameters instead of URL querystring
-router.put('/createUser', (req, res) => {
-    const username = req.query.username;
-    const password = req.query.password;
-    const email = req.query.email;
-    pool.query('INSERT INTO users (id, username, password, email) VALUES ($1, $2, $3, $4)', [uuid(), username, password, email], (error, results) => {
-        if(error) {
-            throw error;
-        }
-        res.status(201).json(results.rows);
-    })
-});*/
-
-/* TODO
-router.put('/:userId', (req, res) => {
-    const username = req.query.username;
-    const password = req.query.password;
-    const email = req.query.email;
-    pool.query('INSERT INTO users (id, username, password, email) VALUES ($1, $2, $3, $4)',
-    [uuid.v1(), username, password, email], (error, results) => {
-        if(error) {
-            throw error;
-        }
-        res.status(201).json(results.rows);
-    })
+router.put('/:userId', async (req, res) => {
+    const username = req.params.username;
+    try {
+        const user = await User.update({
+            where: {
+                username: username
+            }
+        });
+        res.json(user);
+    } catch(e) {
+        next(e);
+    }
 });
-
-*/
 
 module.exports = router;

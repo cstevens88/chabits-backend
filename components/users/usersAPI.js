@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
@@ -54,7 +54,7 @@ router.get('/:userId', async (req, res, next) => {
 
 router.put('/:userId', async (req, res, next) => {
     try {
-        const user = await User.update(
+        const updatedRow = await User.update(
             {
                 username: req.body.username
             },
@@ -66,7 +66,7 @@ router.put('/:userId', async (req, res, next) => {
             },
             returning: true
         });
-        res.json(user);
+        res.json(updatedRow);
     } catch(e) {
         next(e);
     }

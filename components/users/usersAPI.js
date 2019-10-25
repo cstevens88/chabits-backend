@@ -54,7 +54,7 @@ router.get('/:userId', async (req, res, next) => {
 
 router.put('/:userId', async (req, res, next) => {
     try {
-        const updatedRows = await User.update(
+        const user = await User.update(
             {
                 username: req.body.username
             },
@@ -63,9 +63,10 @@ router.put('/:userId', async (req, res, next) => {
                 id: {
                  [Op.eq]: req.params.userId
                 }
-            }
+            },
+            returning: true
         });
-        res.json(updatedRows);
+        res.json(user);
     } catch(e) {
         next(e);
     }

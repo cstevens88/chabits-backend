@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 /*router.get('/', (req, res) => {
     pool.query('SELECT * FROM chains', (error, results) => {
